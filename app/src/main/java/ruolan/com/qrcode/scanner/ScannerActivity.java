@@ -13,7 +13,6 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -242,10 +241,7 @@ public class ScannerActivity extends Activity  {
         BarcodeFormat type = result.getBarcodeFormat();
         String realContent = result.getText();
         // TODO: 2017/11/28 扫描结果在这里进行处理
-//
-//        if (rxDialogSure == null) {
-//            rxDialogSure = new RxDialogSure(this);//提示弹窗
-//        }
+        Toast.makeText(this, realContent, Toast.LENGTH_SHORT).show();
 
         if (BarcodeFormat.QR_CODE.equals(type)) {
 //            rxDialogSure.setTitle("二维码扫描结果");
@@ -255,38 +251,13 @@ public class ScannerActivity extends Activity  {
 //            rxDialogSure.setTitle("扫描结果");
         }
 //
-//        rxDialogSure.setContent(realContent);
-//        rxDialogSure.setSureListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                rxDialogSure.cancel();
-//            }
-//        });
-//        rxDialogSure.setOnCancelListener(new DialogInterface.OnCancelListener() {
-//            @Override
-//            public void onCancel(DialogInterface dialog) {
-//                if (handler != null) {
-//                    // 连续扫描，不发送此消息扫描一次结束后就不能再次扫描
-//                    handler.sendEmptyMessage(R.id.restart_preview);
-//                }
-//            }
-//        });
-//
-//        if (!rxDialogSure.isShowing()) {
-//            rxDialogSure.show();
-//        }
 
-//        RxSPTool.putContent(mContext, RxConstants.SP_SCAN_CODE, RxDataTool.stringToInt(RxSPTool.getContent(mContext, RxConstants.SP_SCAN_CODE)) + 1 + "");
     }
 
     public void handleDecode(Result result) {
         inactivityTimer.onActivity();
-//        RxBeepTool.playBeep(mContext, vibrate);//扫描成功之后的振动与声音提示
 
-        String result1 = result.getText();
-        Log.v("二维码/条形码 扫描结果", result1);
         if (mScanerListener == null) {
-//            RxToast.success(result1);
 
             initDialogResult(result);
         } else {
